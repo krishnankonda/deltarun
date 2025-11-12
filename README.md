@@ -2,11 +2,12 @@
 
 Working on a CLI tool that helps developers manage the cost of training models across multiple cloud providers. The motivation to create this project came from a desire to help mitigate the looming data gravity problem, where the location and size of data increasingly limit cost-effective choices for compute. With this tool, developers can ideally make informed decisions about where to train their models given constraints. MVP 1 is a read-only, non-authenticated analysis tool that performs break-even analysis for cloud compute costs versus data egress fees.
 
-Put simply:
+Put simply:\
 When training ML models, you face a trade-off:
  - Run locally (where your data is): no data transfer fees, but compute may be expensive
- - Run remotely (cheaper compute): lower compute cost, but you pay to transfer data
-This tool calculates the break-even point: how long your job must run before the remote option becomes cheaper.
+ - Run remotely (cheaper compute): lower compute cost, but you pay to transfer data (egress fees)
+
+This tool hopes to fix this issue by calculating the break-even point: how long your job must run before a remote option becomes cheaper.
 
 ## Current Status
 
