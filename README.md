@@ -35,7 +35,3 @@ The system consists of 5 main components:
 - **Go 1.21+** (optional, for local Cost Engine development)
 
 ## Quick Start Guide (Coming Soon)
-
-## License
-
-MIT
