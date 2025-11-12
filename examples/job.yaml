@@ -1,0 +1,14 @@
+job_name: "train-llama-v3-experiment"
+
+data:
+  location: "aws:s3:us-east-1"
+  size_gb: 10000
+
+compute:
+  gpu_type: "H100"
+  gpu_count: 8
+
+output:
+  location: "aws:s3:us-east-1"
+  path: "s3://my-checkpoints/train-llama-v3-experiment/"
+

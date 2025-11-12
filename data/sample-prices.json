@@ -1,0 +1,108 @@
+{
+    "gpu_maps": {
+        "H100:8": [
+            "aws:us-east-1:p5.48xlarge",
+            "aws:us-west-2:p5.48xlarge",
+            "gcp:us-central1:a3-highgpu-8g",
+            "coreweave:lva:HGX_H100_80G"
+        ],
+        "H100:1": [
+            "aws:us-east-1:p5.xlarge"
+        ],
+        "A100:8": [
+            "aws:us-east-1:p4d.24xlarge",
+            "gcp:us-central1:a2-highgpu-8g"
+        ]
+    },
+    "compute": {
+        "aws:us-east-1:p5.48xlarge": {
+            "provider": "AWS",
+            "region": "us-east-1",
+            "instance_type": "p5.48xlarge",
+            "cost_per_hour": 16.00,
+            "gpu_count": 8,
+            "gpu_memory_gb": 80,
+            "interconnect": "ethernet"
+        },
+        "aws:us-west-2:p5.48xlarge": {
+            "provider": "AWS",
+            "region": "us-west-2",
+            "instance_type": "p5.48xlarge",
+            "cost_per_hour": 16.00,
+            "gpu_count": 8,
+            "gpu_memory_gb": 80,
+            "interconnect": "ethernet"
+        },
+        "gcp:us-central1:a3-highgpu-8g": {
+            "provider": "GCP",
+            "region": "us-central1",
+            "instance_type": "a3-highgpu-8g",
+            "cost_per_hour": 17.00,
+            "gpu_count": 8,
+            "gpu_memory_gb": 80,
+            "interconnect": "ethernet"
+        },
+        "coreweave:lva:HGX_H100_80G": {
+            "provider": "CoreWeave",
+            "region": "lva",
+            "instance_type": "HGX_H100_80G",
+            "cost_per_hour": 12.00,
+            "gpu_count": 8,
+            "gpu_memory_gb": 80,
+            "interconnect": "infiniband"
+        },
+        "aws:us-east-1:p5.xlarge": {
+            "provider": "AWS",
+            "region": "us-east-1",
+            "instance_type": "p5.xlarge",
+            "cost_per_hour": 2.00,
+            "gpu_count": 1,
+            "gpu_memory_gb": 80,
+            "interconnect": "ethernet"
+        },
+        "aws:us-east-1:p4d.24xlarge": {
+            "provider": "AWS",
+            "region": "us-east-1",
+            "instance_type": "p4d.24xlarge",
+            "cost_per_hour": 14.00,
+            "gpu_count": 8,
+            "gpu_memory_gb": 40,
+            "interconnect": "ethernet"
+        },
+        "gcp:us-central1:a2-highgpu-8g": {
+            "provider": "GCP",
+            "region": "us-central1",
+            "instance_type": "a2-highgpu-8g",
+            "cost_per_hour": 15.00,
+            "gpu_count": 8,
+            "gpu_memory_gb": 40,
+            "interconnect": "ethernet"
+        }
+    },
+    "egress": {
+        "aws:s3:us-east-1:INTERNET": {
+            "cost_per_gb": 0.09
+        },
+        "aws:ec2:us-east-1:INTERNET": {
+            "cost_per_gb": 0.10
+        },
+        "aws:s3:us-east-1:aws:us-west-2": {
+            "cost_per_gb": 0.02
+        },
+        "aws:s3:us-west-2:INTERNET": {
+            "cost_per_gb": 0.09
+        },
+        "gcp:gcs:us-central1:INTERNET": {
+            "cost_per_gb": 0.12
+        },
+        "coreweave:storage:lva:INTERNET": {
+            "cost_per_gb": 0.05
+        }
+    },
+    "spot_api": {
+        "aws": {
+            "endpoint": "https://ec2.amazonaws.com",
+            "instance_key_format": "{instance_type}"
+        }
+    }
+}

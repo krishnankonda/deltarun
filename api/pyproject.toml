@@ -1,0 +1,16 @@
+[project]
+name = "finops-api"
+version = "0.1.0"
+description = "FinOps Orchestrator Backend API"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.104.0",
+    "httpx>=0.25.0",
+    "pydantic>=2.5.0",
+    "uvicorn[standard]>=0.24.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+

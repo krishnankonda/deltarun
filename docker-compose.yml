@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: finops-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    command: redis-server --appendonly yes
+    networks:
+      - finops-network
+
+  seed-redis:
+    image: redis:7-alpine
+    container_name: finops-seed-redis
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./scripts/seed-redis.sh:/seed-redis.sh
+      - ./data/sample-prices.json:/sample-prices.json
+    entrypoint: ["sh", "/seed-redis.sh"]
+    networks:
+      - finops-network
+
+  cost-engine:
+    build:
+      context: ./cost-engine
+      dockerfile: Dockerfile
+    container_name: finops-cost-engine
+    ports:
+      - "8080:8080"
+    environment:
+      - REDIS_ADDR=redis:6379
+      - PORT=8080
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - finops-network
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: finops-api
+    ports:
+      - "8000:8000"
+    environment:
+      - COST_ENGINE_URL=http://cost-engine:8080
+    depends_on:
+      - cost-engine
+      - redis
+    networks:
+      - finops-network
+
+volumes:
+  redis-data:
+
+networks:
+  finops-network:
+    name: finops-network
+
